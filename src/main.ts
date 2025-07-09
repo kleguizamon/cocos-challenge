@@ -18,40 +18,32 @@ async function bootstrap() {
 	const config = new DocumentBuilder()
 		.setTitle('Trading API')
 		.setDescription(
-			`
-# Trading/Broker API
+			`	# Trading/Broker API
 
-Complete trading system built with NestJS, TypeORM, and PostgreSQL.
+			Complete trading system built with NestJS, TypeORM, and PostgreSQL.
 
-## Features
-- **Portfolio Management**: Real-time portfolio valuations with daily returns
-- **Order Management**: MARKET and LIMIT orders with full validation
-- **Instrument Search**: Search by ticker or company name
-- **Cash Operations**: Deposits and withdrawals via CASH_IN/CASH_OUT
-- **Business Logic**: Comprehensive fund and share availability checks
+			## Features
+			- **Portfolio Management**: Real-time portfolio valuations with daily returns
+			- **Order Management**: MARKET and LIMIT orders with full validation
+			- **Instrument Search**: Search by ticker or company name
+			- **Cash Operations**: Deposits and withdrawals via CASH_IN/CASH_OUT
+			- **Business Logic**: Comprehensive fund and share availability checks
 
-## Order Types
-- **MARKET**: Executes immediately at current market price → Status: FILLED
-- **LIMIT**: Executes when price reaches specified level → Status: NEW
+			## Order Types
+			- **MARKET**: Executes immediately at current market price → Status: FILLED
+			- **LIMIT**: Executes when price reaches specified level → Status: NEW
 
-## Order Sides
-- **BUY**: Purchase shares (validates available cash)
-- **SELL**: Sell shares (validates share ownership)
-- **CASH_IN**: Deposit cash (instrument ID 66 - ARS)
-- **CASH_OUT**: Withdraw cash (validates available balance)
+			## Order Sides
+			- **BUY**: Purchase shares (validates available cash)
+			- **SELL**: Sell shares (validates share ownership)
+			- **CASH_IN**: Deposit cash (instrument ID 66 - ARS)
+			- **CASH_OUT**: Withdraw cash (validates available balance)
 
-## Order Status Flow
-- **NEW**: Limit order placed, waiting for execution
-- **FILLED**: Order executed successfully
-- **REJECTED**: Order rejected due to insufficient funds/shares
-- **CANCELLED**: Order cancelled by user (only NEW orders)
-
-## Important Notes
-- All prices are in Argentine Pesos (ARS)
-- No fractional shares allowed
-- Instrument ID 66 represents ARS currency for cash operations
-- Portfolio calculations use latest market data for valuations
-    `
+			## Order Status Flow
+			- **NEW**: Limit order placed, waiting for execution
+			- **FILLED**: Order executed successfully
+			- **REJECTED**: Order rejected due to insufficient funds/shares
+			- **CANCELLED**: Order cancelled by user (only NEW orders)     `
 		)
 		.setVersion('1.0')
 		.addTag('orders', 'Order management endpoints')
