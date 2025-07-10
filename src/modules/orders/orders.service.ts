@@ -56,7 +56,10 @@ export class OrdersService {
 		let orderPrice = price;
 		let orderSize = size;
 
-		if (type === OrderType.MARKET) {
+		// for CASH_IN and CASH_OUT, the price is always 1 since it's in pesos
+		if (side === OrderSide.CASH_IN || side === OrderSide.CASH_OUT) {
+			orderPrice = 1;
+		} else if (type === OrderType.MARKET) {
 			const marketData = await this.marketdataService.getLatestMarketData(
 				instrumentId
 			);
@@ -108,7 +111,11 @@ export class OrdersService {
 			size: orderSize,
 			price: orderPrice,
 			status:
-				type === OrderType.MARKET ? OrderStatus.FILLED : OrderStatus.NEW,
+				type === OrderType.MARKET ||
+				side === OrderSide.CASH_IN ||
+				side === OrderSide.CASH_OUT
+					? OrderStatus.FILLED
+					: OrderStatus.NEW,
 		});
 
 		return this.orderRepository.save(order);

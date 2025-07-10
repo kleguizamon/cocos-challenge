@@ -35,7 +35,13 @@ export class PortfolioService {
 			{ quantity: number; avgPrice: number; totalCost: number }
 		>();
 
-		for (const order of filledOrders) {
+		// Procesar las órdenes en orden cronológico
+		const sortedOrders = filledOrders.sort(
+			(a, b) =>
+				new Date(a.datetime).getTime() - new Date(b.datetime).getTime()
+		);
+
+		for (const order of sortedOrders) {
 			// La lógica de CASH_IN/OUT ya está cubierta por calculateAvailableCash.
 			// Solo procesamos compras y ventas de activos.
 			if (order.instrument.type === 'MONEDA') {
@@ -44,7 +50,7 @@ export class PortfolioService {
 
 			const instrumentId = order.instrumentId;
 			this.logger.log(
-				`[getPortfolio] Processing asset order: ${order.id} for instrument ${instrumentId}`
+				`[getPortfolio] Processing order: ${order.id}, type: ${order.side}, size: ${order.size} for instrument ${instrumentId}`
 			);
 
 			if (order.side === OrderSide.BUY) {
@@ -65,19 +71,35 @@ export class PortfolioService {
 					avgPrice: newTotalCost / newQuantity,
 					totalCost: newTotalCost,
 				});
+
+				this.logger.log(
+					`[getPortfolio] After BUY - Instrument ${instrumentId}: quantity=${newQuantity}, avgPrice=${
+						newTotalCost / newQuantity
+					}`
+				);
 			} else if (order.side === OrderSide.SELL) {
 				if (positions.has(instrumentId)) {
 					const position = positions.get(instrumentId);
 					const newQuantity = position.quantity - order.size;
 
+					this.logger.log(
+						`[getPortfolio] Processing SELL - Current quantity: ${position.quantity}, Selling: ${order.size}, New quantity: ${newQuantity}`
+					);
+
 					if (newQuantity <= 0) {
 						positions.delete(instrumentId);
+						this.logger.log(
+							`[getPortfolio] Position closed for instrument ${instrumentId}`
+						);
 					} else {
 						positions.set(instrumentId, {
 							quantity: newQuantity,
 							avgPrice: position.avgPrice,
 							totalCost: position.avgPrice * newQuantity,
 						});
+						this.logger.log(
+							`[getPortfolio] Updated position for instrument ${instrumentId}: quantity=${newQuantity}`
+						);
 					}
 				}
 			}
