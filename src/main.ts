@@ -27,7 +27,6 @@ async function bootstrap() {
 			- **Order Management**: MARKET and LIMIT orders with full validation
 			- **Instrument Search**: Search by ticker or company name
 			- **Cash Operations**: Deposits and withdrawals via CASH_IN/CASH_OUT
-			- **Business Logic**: Comprehensive fund and share availability checks
 
 			## Order Types
 			- **MARKET**: Executes immediately at current market price → Status: FILLED

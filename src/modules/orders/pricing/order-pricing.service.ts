@@ -1,6 +1,6 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { OrderType, OrderSide } from '../../entities/order.entity';
-import { MarketdataService } from '../marketdata/marketdata.service';
+import { OrderType, OrderSide } from '../../../entities/order.entity';
+import { MarketdataService } from '../../marketdata/marketdata.service';
 
 @Injectable()
 export class OrderPricingService {

@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Order, OrderSide, OrderStatus } from '../../entities/order.entity';
+import { Order, OrderSide, OrderStatus } from '../../../entities/order.entity';
 
 @Injectable()
 export class OrderValidationService {

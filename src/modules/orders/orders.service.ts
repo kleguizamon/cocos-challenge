@@ -14,8 +14,8 @@ import {
 import { CreateOrderDto } from '../../dtos/create-order.dto';
 import { UsersService } from '../users/users.service';
 import { InstrumentsService } from '../instruments/instruments.service';
-import { OrderValidationService } from './order-validation.service';
-import { OrderPricingService } from './order-pricing.service';
+import { OrderValidationService } from './validation/order-validation.service';
+import { OrderPricingService } from './pricing/order-pricing.service';
 
 @Injectable()
 export class OrdersService {
@@ -139,9 +139,7 @@ export class OrdersService {
 		});
 	}
 
-
 	public async calculateAvailableCash(userId: number): Promise<number> {
 		return this.orderValidationService.calculateAvailableCash(userId);
 	}
-
 }
