@@ -3,6 +3,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Order, OrderSide, OrderStatus } from '../../../entities/order.entity';
 
+/**
+ * This service is responsible for validating an order.
+ * It is used to validate an order.
+ * It is also used to calculate the available cash of a user.
+ * It is also used to calculate the available shares of a user.
+ */
+
 @Injectable()
 export class OrderValidationService {
 	private readonly logger = new Logger(OrderValidationService.name);
@@ -50,6 +57,11 @@ export class OrderValidationService {
 		return { isValid: true };
 	}
 
+	/**
+	 * This method is responsible for calculating the available cash of a user.
+	 * It is used to calculate the available cash of a user.
+	 */
+
 	async calculateAvailableCash(userId: number): Promise<number> {
 		this.logger.log(
 			`[calculateAvailableCash] Starting for userId: ${userId}`
@@ -62,23 +74,8 @@ export class OrderValidationService {
 		let cash = 0;
 
 		for (const order of orders) {
-			const value = order.size * order.price;
-			if (order.instrument.type === 'MONEDA') {
-				if (order.side === OrderSide.CASH_IN) {
-					cash += value;
-				} else if (order.side === OrderSide.CASH_OUT) {
-					cash -= value;
-				}
-			} else {
-				if (order.side === OrderSide.BUY) {
-					cash -= value;
-				} else if (order.side === OrderSide.SELL) {
-					cash += value;
-				}
-			}
-			this.logger.log(
-				`[calculateAvailableCash] Order ${order.id} (${order.side} ${order.instrument.ticker}), cash is now: ${cash}`
-			);
+			cash += this.calculateOrderCashImpact(order);
+			this.logCashUpdate(order, cash);
 		}
 
 		this.logger.log(
@@ -86,6 +83,11 @@ export class OrderValidationService {
 		);
 		return Math.max(0, cash);
 	}
+
+	/**
+	 * This method is responsible for calculating the available shares of a user.
+	 * It is used to calculate the available shares of a user.
+	 */
 
 	async calculateAvailableShares(
 		userId: number,
@@ -106,6 +108,33 @@ export class OrderValidationService {
 
 		return Math.max(0, shares);
 	}
+
+	/**
+	 * This method is responsible for calculating the cash impact of an order.
+	 * It is used to calculate the cash impact of an order.
+	 */
+
+	private calculateOrderCashImpact(order: Order): number {
+		const value = order.size * order.price;
+		const isCurrencyOperation = order.instrument.type === 'MONEDA';
+
+		if (isCurrencyOperation) {
+			return order.side === OrderSide.CASH_IN ? value : -value;
+		}
+
+		return order.side === OrderSide.SELL ? value : -value;
+	}
+
+	private logCashUpdate(order: Order, currentCash: number): void {
+		this.logger.log(
+			`[calculateAvailableCash] Order ${order.id} (${order.side} ${order.instrument.ticker}), cash is now: ${currentCash}`
+		);
+	}
+
+	/**
+	 * This method is responsible for getting the filled orders of a user.
+	 * It is used to get the filled orders of a user.
+	 */
 
 	private async getFilledOrdersByUser(userId: number): Promise<Order[]> {
 		return this.orderRepository.find({

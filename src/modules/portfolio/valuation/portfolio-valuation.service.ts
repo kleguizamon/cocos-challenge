@@ -4,6 +4,12 @@ import { MarketData } from '../../../entities/marketdata.entity';
 import { Instrument } from '../../../entities/instrument.entity';
 import { Position } from '../calculator/position-calculator.service';
 
+/**
+ * This service is responsible for calculating the metrics of a position.
+ * It is used to calculate the current value, daily return, and total return of a position.
+ * It is also used to calculate the total return of a portfolio.
+ */
+
 @Injectable()
 export class PortfolioValuationService {
 	calculatePositionMetrics(
@@ -29,6 +35,11 @@ export class PortfolioValuationService {
 		};
 	}
 
+	/**
+	 * This method is responsible for creating a position dto.
+	 * It is used to create a position dto.
+	 */
+
 	createPositionDto(
 		instrumentId: number,
 		instrument: Instrument,
@@ -50,6 +61,11 @@ export class PortfolioValuationService {
 			avgPrice: position.avgPrice,
 		};
 	}
+
+	/**
+	 * This method is responsible for calculating the daily return of a portfolio.
+	 * It is used to calculate the daily return of a portfolio.
+	 */
 
 	calculatePortfolioDailyReturn(
 		positions: PositionDto[],

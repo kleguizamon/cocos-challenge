@@ -7,6 +7,12 @@ export interface Position {
 	totalCost: number;
 }
 
+/**
+ * This service is responsible for calculating the positions of a user.
+ * It is used to calculate the positions of a user.
+ * It is also used to calculate the total value of the positions.
+ */
+
 @Injectable()
 export class PositionCalculatorService {
 	private readonly logger = new Logger(PositionCalculatorService.name);
@@ -47,6 +53,11 @@ export class PositionCalculatorService {
 		);
 	}
 
+	/**
+	 * This method is responsible for processing a buy order.
+	 * It is used to calculate the positions of a user.
+	 */
+
 	private processBuyOrder(
 		positions: Map<number, Position>,
 		instrumentId: number,
@@ -76,6 +87,11 @@ export class PositionCalculatorService {
 			}`
 		);
 	}
+
+	/**
+	 * This method is responsible for processing a sell order.
+	 * It is used to calculate the positions of a user.
+	 */
 
 	private processSellOrder(
 		positions: Map<number, Position>,

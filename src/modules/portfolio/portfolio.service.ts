@@ -9,6 +9,14 @@ import {
 import { PositionCalculatorService } from './calculator/position-calculator.service';
 import { PortfolioValuationService } from './valuation/portfolio-valuation.service';
 
+/**
+ * This service is responsible for getting the portfolio of a user.
+ * It is used to get the portfolio of a user.
+ * It is also used to get the total value of the portfolio.
+ * It is also used to get the daily return of the portfolio.
+ * It is also used to get the positions of the portfolio.
+ */
+
 @Injectable()
 export class PortfolioService {
 	private readonly logger = new Logger(PortfolioService.name);
@@ -41,6 +49,7 @@ export class PortfolioService {
 
 		const marketDataList =
 			await this.marketdataService.getMarketDataByInstruments(instrumentIds);
+
 		const marketDataMap = new Map(
 			marketDataList.map((md) => [md.instrumentId, md])
 		);

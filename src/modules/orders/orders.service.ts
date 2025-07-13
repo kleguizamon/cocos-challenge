@@ -17,6 +17,11 @@ import { InstrumentsService } from '../instruments/instruments.service';
 import { OrderValidationService } from './validation/order-validation.service';
 import { OrderPricingService } from './pricing/order-pricing.service';
 
+/**
+ * This service is responsible for creating, finding, cancelling, and getting orders.
+ * It is also used to calculate the available cash of a user.
+ */
+
 @Injectable()
 export class OrdersService {
 	constructor(
