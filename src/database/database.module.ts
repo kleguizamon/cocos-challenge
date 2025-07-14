@@ -7,23 +7,29 @@ import { User, Instrument, Order, MarketData } from '../entities';
 	imports: [
 		TypeOrmModule.forRootAsync({
 			imports: [ConfigModule],
-			useFactory: (configService: ConfigService) => ({
-				type: 'postgres',
-				host: configService.get('DATABASE_HOST'),
-				port: +configService.get('DATABASE_PORT'),
-				username: configService.get('DATABASE_USERNAME'),
-				password: configService.get('DATABASE_PASSWORD'),
-				database: configService.get('DATABASE_NAME'),
-				entities: [User, Instrument, Order, MarketData],
-				synchronize: true,
-				logging: true,
-				ssl: true,
-				extra: {
-					ssl: {
-						rejectUnauthorized: false,
-					},
-				},
-			}),
+			useFactory: (configService: ConfigService) => {
+				const useSSL = configService.get('DATABASE_SSL') === 'true';
+
+				return {
+					type: 'postgres',
+					host: configService.get('DATABASE_HOST'),
+					port: +configService.get('DATABASE_PORT'),
+					username: configService.get('DATABASE_USERNAME'),
+					password: configService.get('DATABASE_PASSWORD'),
+					database: configService.get('DATABASE_NAME'),
+					entities: [User, Instrument, Order, MarketData],
+					synchronize: true,
+					logging: true,
+					...(useSSL && {
+						ssl: true,
+						extra: {
+							ssl: {
+								rejectUnauthorized: false,
+							},
+						},
+					}),
+				};
+			},
 			inject: [ConfigService],
 		}),
 	],

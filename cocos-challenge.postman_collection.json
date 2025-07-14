@@ -1,0 +1,343 @@
+{
+	"info": {
+		"_postman_id": "your-collection-id",
+		"name": "Cocos Challenge",
+		"description": "API Collection for Cocos Challenge - Portfolio Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Portfolio",
+			"item": [
+				{
+					"name": "Get Portfolio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/portfolio/{{userId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "portfolio", "{{userId}}"]
+						},
+						"description": "Get user's portfolio including total value, available cash, and positions"
+					}
+				}
+			]
+		},
+		{
+			"name": "Instruments",
+			"item": [
+				{
+					"name": "Search Instruments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/instruments/search?query=GGAL",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "instruments", "search"],
+							"query": [
+								{
+									"key": "query",
+									"value": "GGAL"
+								}
+							]
+						},
+						"description": "Search instruments by ticker or name"
+					}
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "Cash Operations",
+					"item": [
+						{
+							"name": "Cash In (Deposit)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": {{userId}},\n    \"instrumentId\": 66,\n    \"side\": \"CASH_IN\",\n    \"type\": \"MARKET\",\n    \"size\": 10000\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/orders",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "orders"]
+								},
+								"description": "Deposit cash into account"
+							}
+						},
+						{
+							"name": "Cash Out (Withdrawal)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": {{userId}},\n    \"instrumentId\": 66,\n    \"side\": \"CASH_OUT\",\n    \"type\": \"MARKET\",\n    \"size\": 5000\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/orders",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "orders"]
+								},
+								"description": "Withdraw cash from account"
+							}
+						}
+					]
+				},
+				{
+					"name": "Market Orders",
+					"item": [
+						{
+							"name": "Market Buy (by size)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": {{userId}},\n    \"instrumentId\": 1,\n    \"side\": \"BUY\",\n    \"type\": \"MARKET\",\n    \"size\": 10\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/orders",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "orders"]
+								},
+								"description": "Buy shares specifying exact quantity"
+							}
+						},
+						{
+							"name": "Market Buy (by amount)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": {{userId}},\n    \"instrumentId\": 1,\n    \"side\": \"BUY\",\n    \"type\": \"MARKET\",\n    \"amount\": 1500\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/orders",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "orders"]
+								},
+								"description": "Buy shares specifying total investment amount"
+							}
+						},
+						{
+							"name": "Market Sell (by size)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": {{userId}},\n    \"instrumentId\": 1,\n    \"side\": \"SELL\",\n    \"type\": \"MARKET\",\n    \"size\": 5\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/orders",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "orders"]
+								},
+								"description": "Sell shares specifying exact quantity"
+							}
+						},
+						{
+							"name": "Market Sell (by amount)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": {{userId}},\n    \"instrumentId\": 1,\n    \"side\": \"SELL\",\n    \"type\": \"MARKET\",\n    \"amount\": 1500\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/orders",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "orders"]
+								},
+								"description": "Sell shares specifying total sale amount"
+							}
+						}
+					]
+				},
+				{
+					"name": "Limit Orders",
+					"item": [
+						{
+							"name": "Limit Buy (by size)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": {{userId}},\n    \"instrumentId\": 1,\n    \"side\": \"BUY\",\n    \"type\": \"LIMIT\",\n    \"price\": 100,\n    \"size\": 10\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/orders",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "orders"]
+								},
+								"description": "Place limit buy order with exact quantity"
+							}
+						},
+						{
+							"name": "Limit Buy (by amount)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": {{userId}},\n    \"instrumentId\": 1,\n    \"side\": \"BUY\",\n    \"type\": \"LIMIT\",\n    \"price\": 100,\n    \"amount\": 1500\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/orders",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "orders"]
+								},
+								"description": "Place limit buy order with investment amount"
+							}
+						},
+						{
+							"name": "Limit Sell (by size)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": {{userId}},\n    \"instrumentId\": 1,\n    \"side\": \"SELL\",\n    \"type\": \"LIMIT\",\n    \"price\": 100,\n    \"size\": 5\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/orders",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "orders"]
+								},
+								"description": "Place limit sell order with exact quantity"
+							}
+						},
+						{
+							"name": "Limit Sell (by amount)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": {{userId}},\n    \"instrumentId\": 1,\n    \"side\": \"SELL\",\n    \"type\": \"LIMIT\",\n    \"price\": 100,\n    \"amount\": 1000\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/orders",
+									"host": ["{{baseUrl}}"],
+									"path": ["api", "orders"]
+								},
+								"description": "Place limit sell order with sale amount"
+							}
+						}
+					]
+				},
+				{
+					"name": "Cancel Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/orders/{{orderId}}/cancel",
+							"host": ["{{baseUrl}}"],
+							"path": ["api", "orders", "{{orderId}}", "cancel"]
+						},
+						"description": "Cancel a pending limit order"
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [""]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [""]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:4000",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "orderId",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}

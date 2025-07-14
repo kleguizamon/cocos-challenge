@@ -1,4 +1,4 @@
-.PHONY: install build run dev db-up db-migrate db-seed db-seed-local clean
+.PHONY: install build run dev db-up db-migrate clean
 
 install:
 	npm install
@@ -18,14 +18,6 @@ db-up:
 # Execute migrations in Docker
 db-migrate:
 	docker compose exec api npm run typeorm:run-migrations
-
-# Seed in Docker
-db-seed:
-	docker compose exec api npm run seed
-
-# Seed local (for development)
-db-seed-local:
-	npm run seed
 
 # View database logs
 db-logs:
