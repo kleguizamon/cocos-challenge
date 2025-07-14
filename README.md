@@ -6,16 +6,16 @@ Broker/trading system that handles portfolio management, order execution, and ma
 
 ## 📋 Table of Contents
 
-- [Challenge Requirements](#challenge-requirements)
-- [System Design](#system-design)
-- [Core Features](#core-features)
-- [Architecture Overview](#architecture-overview)
-- [Business Logic](#business-logic)
-- [API Documentation](#api-documentation)
-- [Data Model](#data-model)
-- [Advanced Features](#advanced-features)
-- [Setup & Installation](#setup--installation)
-- [Testing](#testing)
+- [Challenge Requirements](#-challenge-requirements)
+- [System Design](#-system-design)
+- [Core Features](#-core-features)
+- [Architecture Overview](#-architecture-overview)
+- [Business Logic](#-business-logic)
+- [API Documentation](#-api-documentation)
+- [Data Model](#-data-model)
+- [Advanced Features](#-advanced-features)
+- [Setup & Installation](#-setup--installation)
+- [Testing](#-testing)
 
 ---
 
