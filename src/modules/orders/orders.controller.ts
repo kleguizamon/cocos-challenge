@@ -30,8 +30,7 @@ export class OrdersController {
 	@Post()
 	@ApiOperation({
 		summary: 'Create new order',
-		description:
-			'Creates a new trading order. Supports MARKET and LIMIT orders with BUY/SELL/CASH_IN/CASH_OUT sides. Validates funds and shares availability.',
+		description: 'Creates MARKET/LIMIT orders with validation.',
 	})
 	@ApiBody({
 		type: CreateOrderDto,
@@ -83,8 +82,7 @@ export class OrdersController {
 	})
 	@ApiResponse({
 		status: HttpStatus.CREATED,
-		description:
-			'Order created successfully. MARKET orders return FILLED status, LIMIT orders return NEW status, insufficient funds/shares return REJECTED status.',
+		description: 'Order created successfully.',
 		type: OrderResponseDto,
 	})
 	@ApiResponse({
@@ -137,8 +135,7 @@ export class OrdersController {
 	@Get(':userId')
 	@ApiOperation({
 		summary: 'Get user orders',
-		description:
-			'Retrieves all orders for a specific user, ordered by creation date (newest first)',
+		description: 'Retrieves all orders for a user.',
 	})
 	@ApiParam({
 		name: 'userId',
@@ -148,8 +145,7 @@ export class OrdersController {
 	})
 	@ApiResponse({
 		status: HttpStatus.OK,
-		description:
-			'List of user orders ordered by creation date (newest first)',
+		description: 'List of user orders.',
 		type: [OrderResponseDto],
 	})
 	async getUserOrders(@Param('userId', ParseIntPipe) userId: number) {
@@ -172,8 +168,7 @@ export class OrdersController {
 	@Patch(':orderId/cancel')
 	@ApiOperation({
 		summary: 'Cancel order',
-		description:
-			'Cancels an existing order. Only orders in NEW status can be cancelled.',
+		description: 'Cancels an order in NEW status.',
 	})
 	@ApiParam({
 		name: 'orderId',
@@ -183,8 +178,7 @@ export class OrdersController {
 	})
 	@ApiResponse({
 		status: HttpStatus.OK,
-		description:
-			'Order cancelled successfully. Returns order with CANCELLED status.',
+		description: 'Order cancelled successfully.',
 		type: OrderResponseDto,
 	})
 	@ApiResponse({

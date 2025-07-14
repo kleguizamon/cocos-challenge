@@ -8,9 +8,7 @@ export interface Position {
 }
 
 /**
- * This service is responsible for calculating the positions of a user.
- * It is used to calculate the positions of a user.
- * It is also used to calculate the total value of the positions.
+ * Calculates user positions using weighted average cost method.
  */
 
 @Injectable()
@@ -48,14 +46,14 @@ export class PositionCalculatorService {
 			)}`
 		);
 
+		// Filter out positions with quantity 0
 		return new Map(
 			Array.from(positions.entries()).filter(([_, pos]) => pos.quantity > 0)
 		);
 	}
 
 	/**
-	 * This method is responsible for processing a buy order.
-	 * It is used to calculate the positions of a user.
+	 * Processes a buy order and updates position with weighted average cost.
 	 */
 
 	private processBuyOrder(
@@ -89,8 +87,7 @@ export class PositionCalculatorService {
 	}
 
 	/**
-	 * This method is responsible for processing a sell order.
-	 * It is used to calculate the positions of a user.
+	 * Processes a sell order and updates position quantity.
 	 */
 
 	private processSellOrder(

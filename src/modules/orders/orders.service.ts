@@ -18,8 +18,7 @@ import { OrderValidationService } from './validation/order-validation.service';
 import { OrderPricingService } from './pricing/order-pricing.service';
 
 /**
- * This service is responsible for creating, finding, cancelling, and getting orders.
- * It is also used to calculate the available cash of a user.
+ * Manages order operations including creation, cancellation, and retrieval.
  */
 
 @Injectable()

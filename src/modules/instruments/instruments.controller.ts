@@ -17,13 +17,11 @@ export class InstrumentsController {
 	@Get()
 	@ApiOperation({
 		summary: 'Get all instruments',
-		description:
-			'Retrieves all available trading instruments including stocks, ETFs, and currencies',
+		description: 'Retrieves all available trading instruments.',
 	})
 	@ApiResponse({
 		status: HttpStatus.OK,
-		description:
-			'List of all available trading instruments including stocks, ETFs, and currencies',
+		description: 'List of all available instruments.',
 		type: [InstrumentResponseDto],
 	})
 	async findAll() {
@@ -40,8 +38,7 @@ export class InstrumentsController {
 	@Get('search')
 	@ApiOperation({
 		summary: 'Search instruments',
-		description:
-			'Search for instruments by ticker symbol or company name. If no query is provided, returns all instruments.',
+		description: 'Search instruments by ticker or name.',
 	})
 	@ApiQuery({
 		name: 'q',
@@ -51,8 +48,7 @@ export class InstrumentsController {
 	})
 	@ApiResponse({
 		status: HttpStatus.OK,
-		description:
-			'List of instruments matching the search query (by ticker or name). Returns all instruments if no query provided.',
+		description: 'List of matching instruments.',
 		type: [InstrumentResponseDto],
 	})
 	async search(@Query('query') query: string) {

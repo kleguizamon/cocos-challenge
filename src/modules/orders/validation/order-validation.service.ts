@@ -4,10 +4,7 @@ import { Repository } from 'typeorm';
 import { Order, OrderSide, OrderStatus } from '../../../entities/order.entity';
 
 /**
- * This service is responsible for validating an order.
- * It is used to validate an order.
- * It is also used to calculate the available cash of a user.
- * It is also used to calculate the available shares of a user.
+ * Validates orders and calculates available cash/shares for users.
  */
 
 @Injectable()
@@ -58,8 +55,7 @@ export class OrderValidationService {
 	}
 
 	/**
-	 * This method is responsible for calculating the available cash of a user.
-	 * It is used to calculate the available cash of a user.
+	 * Calculates available cash for a user based on filled orders.
 	 */
 
 	async calculateAvailableCash(userId: number): Promise<number> {
@@ -85,8 +81,7 @@ export class OrderValidationService {
 	}
 
 	/**
-	 * This method is responsible for calculating the available shares of a user.
-	 * It is used to calculate the available shares of a user.
+	 * Calculates available shares for a user and instrument.
 	 */
 
 	async calculateAvailableShares(
@@ -110,8 +105,7 @@ export class OrderValidationService {
 	}
 
 	/**
-	 * This method is responsible for calculating the cash impact of an order.
-	 * It is used to calculate the cash impact of an order.
+	 * Calculates cash impact of an order on user's balance.
 	 */
 
 	private calculateOrderCashImpact(order: Order): number {

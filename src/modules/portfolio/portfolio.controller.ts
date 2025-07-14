@@ -19,8 +19,7 @@ export class PortfolioController {
 	@Get(':userId')
 	@ApiOperation({
 		summary: 'Get user portfolio',
-		description:
-			'Retrieves the complete portfolio for a user including total value, available cash, daily returns, and all positions with current market valuations.',
+		description: 'Retrieves user portfolio with positions and returns.',
 	})
 	@ApiParam({
 		name: 'userId',
@@ -30,8 +29,7 @@ export class PortfolioController {
 	})
 	@ApiResponse({
 		status: HttpStatus.OK,
-		description:
-			'User portfolio with total value, available cash, daily returns and all positions with current market valuations',
+		description: 'User portfolio data.',
 		type: PortfolioResponseDto,
 	})
 	@ApiResponse({

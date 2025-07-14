@@ -5,9 +5,7 @@ import { Instrument } from '../../../entities/instrument.entity';
 import { Position } from '../calculator/position-calculator.service';
 
 /**
- * This service is responsible for calculating the metrics of a position.
- * It is used to calculate the current value, daily return, and total return of a position.
- * It is also used to calculate the total return of a portfolio.
+ * Calculates position metrics, returns, and portfolio valuations.
  */
 
 @Injectable()

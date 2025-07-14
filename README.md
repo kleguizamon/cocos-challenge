@@ -2,7 +2,7 @@
 
 > **Trading platform built with NestJS, TypeORM, and PostgreSQL**
 
-Complete broker/trading system that handles portfolio management, order execution, and real-time market data integration with professional-grade financial calculations.
+Broker/trading system that handles portfolio management, order execution, and market data integration with financial calculations.
 
 ## 📋 Table of Contents
 
@@ -29,6 +29,7 @@ Complete broker/trading system that handles portfolio management, order executio
 
 ### Optional Features ✅
 - ✅ Postman collection provided
+- ✅ Swagger documentation
 - ✅ REST Client examples included
 - ✅ Docker containerization
 
@@ -46,7 +47,7 @@ GET /api/portfolio/:userId
 ```
 - **Real-time portfolio valuation** with current market prices
 - **Available cash calculation** based on all trading activity
-- **Position tracking** with FIFO accounting methodology
+- **Position tracking** with weighted average cost methodology
 - **Performance metrics**: Daily returns and total returns
 - **Portfolio-weighted returns** for overall performance
 
@@ -158,13 +159,25 @@ PATCH /api/orders/:id/cancel  // Cancel order
 
 ### Portfolio Calculation Logic
 
-**1. Position Tracking (FIFO Method)**
+**1. Position Tracking (Weighted Average Cost Method)**
 ```typescript
 // Example: User buys at different prices
-Buy 100 @ $50 = $5,000
-Buy 200 @ $60 = $12,000  
-Buy 100 @ $70 = $7,000
-// Result: 400 shares @ $60 average cost
+Buy 100 @ $50 = $5,000    // Position: 100 shares @ $50.00 avg
+Buy 200 @ $60 = $12,000   // Position: 300 shares @ $56.67 avg
+Buy 100 @ $70 = $7,000    // Position: 400 shares @ $60.00 avg
+
+// Calculation Formula:
+// newTotalCost = position.totalCost + (order.size * order.price)
+// newQuantity = position.quantity + order.size
+// avgPrice = newTotalCost / newQuantity
+
+// Step by step:
+// Step 1: 100 * $50 = $5,000 / 100 = $50.00 avg
+// Step 2: ($5,000 + $12,000) / 300 = $56.67 avg
+// Step 3: ($17,000 + $7,000) / 400 = $60.00 avg
+
+// This method recalculates the average price with each purchase,
+// providing a weighted average cost basis for the entire position.
 ```
 
 **2. Available Cash Calculation**
@@ -200,6 +213,11 @@ totalReturn = ((currentPrice - averageCost) / averageCost) * 100
 ---
 
 ## 📡 API Documentation
+
+The API is documented using Swagger/OpenAPI. You can access the interactive documentation at:
+```http
+http://localhost:4000/api/docs
+```
 
 ### Portfolio Endpoint
 ```http
@@ -307,7 +325,7 @@ id, instrumentId, open, high, low, close, previousClose, date
 ## ⭐ Advanced Features
 
 ### 🧮 Financial Mathematics
-- **FIFO Position Calculation**: Professional average cost basis tracking
+- **Weighted Average Cost Calculation**: Professional average cost basis tracking
 - **Portfolio Weighted Returns**: Accurate portfolio-level performance metrics
 
 ### 🏛️ Enterprise Architecture
@@ -349,7 +367,9 @@ make install
 make run
 ```
 
-The API will be available at `http://localhost:4000`
+The API will be available at:
+- API Endpoints: `http://localhost:4000/api`
+- Swagger Documentation: `http://localhost:4000/api/docs`
 
 ---
 
@@ -357,6 +377,9 @@ The API will be available at `http://localhost:4000`
 
 ### API Testing
 ```bash
+# Access Swagger Documentation
+http://localhost:4000/api/docs
+
 # Import Postman collection
 cocos-challenge.postman_collection.json
 
