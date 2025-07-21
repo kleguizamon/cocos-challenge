@@ -6,6 +6,8 @@ Broker/trading system that handles portfolio management, order execution, and ma
 
 ## 📋 Table of Contents
 
+- [Setup & Installation](#-setup--installation)
+- [Testing](#-testing)
 - [Challenge Requirements](#-challenge-requirements)
 - [System Design](#-system-design)
 - [Core Features](#-core-features)
@@ -14,8 +16,63 @@ Broker/trading system that handles portfolio management, order execution, and ma
 - [API Documentation](#-api-documentation)
 - [Data Model](#-data-model)
 - [Advanced Features](#-advanced-features)
-- [Setup & Installation](#-setup--installation)
-- [Testing](#-testing)
+
+---
+
+## 🚀 Setup & Installation
+
+1. **Clone the repository**
+```bash
+git clone <repository-url>
+cd cocos-challenge
+```
+
+2. **Environment Setup**
+```bash
+# Copy the environment template
+cp .env.example .env
+
+# Edit .env with your database credentials
+nano .env
+```
+
+3. **Install Dependencies**
+```bash
+make install
+```
+
+4. **Run the Application**
+```bash
+make run
+```
+
+The API will be available at:
+- API Endpoints: `http://localhost:4000/api`
+- Swagger Documentation: `http://localhost:4000/api/docs`
+
+---
+
+## 🧪 Testing
+
+### API Testing
+```bash
+# Access Swagger Documentation
+http://localhost:4000/api/docs
+
+# Import Postman collection
+cocos-challenge.postman_collection.json
+
+# Or test manually
+curl -X GET "http://localhost:4000/api/portfolio/1"
+curl -X GET "http://localhost:4000/api/instruments/search?query=AAPL"
+```
+
+### Sample Test Scenarios
+1. **Portfolio Valuation**: Get user portfolio with real-time calculations
+2. **Order Execution**: Submit market and limit orders
+3. **Cash Operations**: Deposit and withdraw funds
+4. **Order Cancellation**: Cancel pending limit orders
+5. **Search Functionality**: Find instruments by ticker or name
 
 ---
 
@@ -337,63 +394,6 @@ id, instrumentId, open, high, low, close, previousClose, date
 - **Swagger Documentation**: Complete API documentation with examples
 - **Docker Setup**: One-command environment setup
 - **Postman Collection**: Ready-to-use API testing collection
-
----
-
-## 🚀 Setup & Installation
-
-1. **Clone the repository**
-```bash
-git clone <repository-url>
-cd cocos-challenge
-```
-
-2. **Environment Setup**
-```bash
-# Copy the environment template
-cp .env.example .env
-
-# Edit .env with your database credentials
-nano .env
-```
-
-3. **Install Dependencies**
-```bash
-make install
-```
-
-4. **Run the Application**
-```bash
-make run
-```
-
-The API will be available at:
-- API Endpoints: `http://localhost:4000/api`
-- Swagger Documentation: `http://localhost:4000/api/docs`
-
----
-
-## 🧪 Testing
-
-### API Testing
-```bash
-# Access Swagger Documentation
-http://localhost:4000/api/docs
-
-# Import Postman collection
-cocos-challenge.postman_collection.json
-
-# Or test manually
-curl -X GET "http://localhost:4000/api/portfolio/1"
-curl -X GET "http://localhost:4000/api/instruments/search?query=AAPL"
-```
-
-### Sample Test Scenarios
-1. **Portfolio Valuation**: Get user portfolio with real-time calculations
-2. **Order Execution**: Submit market and limit orders
-3. **Cash Operations**: Deposit and withdraw funds
-4. **Order Cancellation**: Cancel pending limit orders
-5. **Search Functionality**: Find instruments by ticker or name
 
 ---
 

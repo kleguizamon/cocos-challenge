@@ -5,13 +5,11 @@ config();
 
 export default new DataSource({
 	type: 'postgres',
-	host:
-		process.env.DATABASE_HOST ||
-		'ep-fancy-voice-a8usl8mp-pooler.eastus2.azure.neon.tech',
-	port: parseInt(process.env.DATABASE_PORT, 10) || 5432,
-	username: process.env.DATABASE_USERNAME || 'neondb_owner',
-	password: process.env.DATABASE_PASSWORD || 'npg_SLDxY7hZMt3T',
-	database: process.env.DATABASE_NAME || 'neondb',
+	host: process.env.DATABASE_HOST,
+	port: parseInt(process.env.DATABASE_PORT, 10),
+	username: process.env.DATABASE_USERNAME,
+	password: process.env.DATABASE_PASSWORD,
+	database: process.env.DATABASE_NAME,
 	entities: ['src/**/*.entity.ts'],
 	synchronize: true,
 	ssl: true,
