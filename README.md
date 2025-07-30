@@ -1,4 +1,4 @@
-# 🏛️ Cocos Challenge - Trading API
+# 🏛️ Trading API
 
 > **Trading platform built with NestJS, TypeORM, and PostgreSQL**
 
@@ -24,7 +24,7 @@ Broker/trading system that handles portfolio management, order execution, and ma
 1. **Clone the repository**
 ```bash
 git clone <repository-url>
-cd cocos-challenge
+cd trading-app
 ```
 
 2. **Environment Setup**
