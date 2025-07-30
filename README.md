@@ -60,7 +60,7 @@ The API will be available at:
 http://localhost:4000/api/docs
 
 # Import Postman collection
-cocos-challenge.postman_collection.json
+trading-app.postman_collection.json
 
 # Or test manually
 curl -X GET "http://localhost:4000/api/portfolio/1"
